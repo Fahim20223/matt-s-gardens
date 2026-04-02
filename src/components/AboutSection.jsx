@@ -46,7 +46,7 @@ export default function AboutSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative pb-0 lg:pb-8"
           >
             {/* Main image */}
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-base-200">
@@ -66,22 +66,22 @@ export default function AboutSection() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="absolute -bottom-6 -right-6 lg:-right-10 bg-primary text-primary-content rounded-2xl p-6 shadow-2xl shadow-primary/30 max-w-[180px]"
+              className="absolute bottom-4 right-4 lg:-bottom-6 lg:-right-10 bg-primary text-primary-content rounded-2xl p-4 lg:p-6 shadow-2xl shadow-primary/30 max-w-[150px] lg:max-w-[180px]"
             >
               <p
-                className="text-3xl font-bold leading-none mb-1"
+                className="text-2xl lg:text-3xl font-bold leading-none mb-1"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 10+
               </p>
-              <p className="text-xs text-primary-content/70 font-sans leading-snug uppercase tracking-wider">
+              <p className="text-[10px] lg:text-xs text-primary-content/70 font-sans leading-snug uppercase tracking-wider">
                 Years of hands-on experience
               </p>
             </motion.div>
 
             {/* Decorative element */}
-            <div className="absolute -top-4 -left-4 w-24 h-24 rounded-full bg-primary/8 -z-10" />
-            <div className="absolute top-1/3 -left-8 w-3 h-3 rounded-full bg-primary/40" />
+            <div className="absolute -top-4 -left-4 w-24 h-24 rounded-full bg-primary/8 -z-10 hidden lg:block" />
+            <div className="absolute top-1/3 -left-8 w-3 h-3 rounded-full bg-primary/40 hidden lg:block" />
           </motion.div>
 
           {/* Text side */}
