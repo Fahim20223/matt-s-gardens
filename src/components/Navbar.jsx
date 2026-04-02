@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -15,6 +16,8 @@ export default function Navbar() {
   const [theme, setTheme] = useState("light");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const stored = localStorage.getItem("theme") || "light";
@@ -42,12 +45,12 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          scrolled || !isHome
             ? "bg-base-100/90 backdrop-blur-md shadow-sm border-b border-base-200"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 lg:px-10 h-16 md:h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-9 h-9">
@@ -67,12 +70,12 @@ export default function Navbar() {
             </div>
             <div>
               <span
-                className="font-display text-lg font-bold tracking-tight text-base-content leading-none block"
+                className={`font-display text-lg font-bold tracking-tight leading-none block transition-colors duration-300 ${isHome && !scrolled ? "text-white" : "text-base-content"}`}
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 Matt's Gardens
               </span>
-              <span className="text-[10px] tracking-[0.18em] uppercase text-base-content/40 font-sans">
+              <span className={`text-[10px] tracking-[0.18em] uppercase font-sans transition-colors duration-300 ${isHome && !scrolled ? "text-white/50" : "text-base-content/40"}`}>
                 Hertfordshire
               </span>
             </div>
@@ -84,7 +87,11 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative text-sm tracking-wide text-base-content/70 hover:text-base-content transition-colors duration-200 group font-sans"
+                className={`relative text-sm tracking-wide transition-colors duration-200 group font-sans ${
+                  isHome && !scrolled
+                    ? "text-white/80 hover:text-white"
+                    : "text-base-content/70 hover:text-base-content"
+                }`}
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
@@ -98,7 +105,11 @@ export default function Navbar() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="w-10 h-10 rounded-full border border-base-300 flex items-center justify-center hover:border-primary hover:bg-primary/5 transition-all duration-200"
+              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 hover:bg-primary/10 ${
+                isHome && !scrolled
+                  ? "border-white/30 hover:border-white/70"
+                  : "border-base-300 hover:border-primary"
+              }`}
             >
               <AnimatePresence mode="wait" initial={false}>
                 {theme === "light" ? (
@@ -109,7 +120,7 @@ export default function Navbar() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.25 }}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4 text-base-content/70"
+                    className={`w-4 h-4 transition-colors duration-300 ${isHome && !scrolled ? "text-white/80" : "text-base-content/70"}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -125,7 +136,7 @@ export default function Navbar() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.25 }}
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4 text-base-content/70"
+                    className={`w-4 h-4 transition-colors duration-300 ${isHome && !scrolled ? "text-white/80" : "text-base-content/70"}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -153,15 +164,15 @@ export default function Navbar() {
             >
               <motion.span
                 animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="block w-5 h-px bg-base-content transition-all"
+                className={`block w-5 h-px transition-all ${isHome && !scrolled ? "bg-white" : "bg-base-content"}`}
               />
               <motion.span
                 animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-5 h-px bg-base-content transition-all"
+                className={`block w-5 h-px transition-all ${isHome && !scrolled ? "bg-white" : "bg-base-content"}`}
               />
               <motion.span
                 animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="block w-5 h-px bg-base-content transition-all"
+                className={`block w-5 h-px transition-all ${isHome && !scrolled ? "bg-white" : "bg-base-content"}`}
               />
             </button>
           </div>
@@ -176,7 +187,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-20 left-0 right-0 z-40 bg-base-100/95 backdrop-blur-lg border-b border-base-200 shadow-xl md:hidden"
+            className="fixed top-16 md:top-20 left-0 right-0 z-40 bg-base-100/95 backdrop-blur-lg border-b border-base-200 shadow-xl md:hidden"
           >
             <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-1">
               {navLinks.map((link, i) => (

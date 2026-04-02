@@ -23,7 +23,6 @@ export default function Hero() {
         muted
         loop
         playsInline
-        poster="/images/hero-poster.jpg"
       />
 
       {/* Gradient overlay */}
@@ -40,7 +39,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pb-20 lg:pb-28">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pt-24 md:pt-28 pb-16 lg:pb-28">
         <div className="max-w-3xl">
           {/* Badge */}
           <motion.div
@@ -67,7 +66,7 @@ export default function Hero() {
             className="text-white mb-6 leading-[1.05]"
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+              fontSize: "clamp(2rem, 7vw, 5.5rem)",
               fontWeight: 700,
               letterSpacing: "-0.02em",
             }}
