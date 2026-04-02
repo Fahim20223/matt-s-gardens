@@ -11,9 +11,15 @@ const services = [
     tagline: "Crisp edges, tidy lines.",
     description:
       "From small garden hedges to large boundary privets, I'll get them looking sharp. Regular trimming keeps your garden looking well-maintained and healthy — and it's something I genuinely enjoy getting right. No jagged edges, no missed patches.",
-    features: ["All hedge types & sizes", "Clean-up included", "Shape & height adjustments", "Seasonal scheduling available"],
+    features: [
+      "All hedge types & sizes",
+      "Clean-up included",
+      "Shape & height adjustments",
+      "Seasonal scheduling available",
+    ],
     image: "/images/hedge-trimming.jpg",
-    fallback: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    fallback:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
     color: "from-green-900/20",
   },
   {
@@ -22,9 +28,16 @@ const services = [
     tagline: "Out with the old, in with the fresh.",
     description:
       "Overgrown garden? Inherited a mess? I'll clear it all out — weeds, debris, old plants, rubbish — and leave you with a clean slate. Ideal before a redesign or if you just want your outdoor space back. All waste is disposed of responsibly.",
-    features: ["Full or partial clearances", "Waste removal included", "Before & after documentation", "Same-day quotes available"],
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
-    fallback: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
+    features: [
+      "Full or partial clearances",
+      "Waste removal included",
+      "Before & after documentation",
+      "Same-day quotes available",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
+    fallback:
+      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
     color: "from-stone-900/20",
   },
   {
@@ -33,9 +46,16 @@ const services = [
     tagline: "Keep your trees in check.",
     description:
       "Crown reduction, deadwood removal, basic pruning — I handle small tree work safely and carefully. Whether it's a fruit tree that needs a tidy up or a young tree that's getting too big for the space, I'll bring it back under control.",
-    features: ["Crown reduction & shaping", "Deadwood removal", "Stump grinding available", "Safe & tidy working"],
-    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
-    fallback: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
+    features: [
+      "Crown reduction & shaping",
+      "Deadwood removal",
+      "Stump grinding available",
+      "Safe & tidy working",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
+    fallback:
+      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
     color: "from-emerald-900/20",
   },
   {
@@ -44,9 +64,16 @@ const services = [
     tagline: "Make it look brand new.",
     description:
       "Driveways, patios, decking, pathways — jet washing makes an incredible difference. Years of grime, moss, and algae lifted in a few hours. It's one of the most satisfying services I offer, and the results speak for themselves.",
-    features: ["Driveways & patios", "Decking & paving", "Moss & algae removal", "Fencing & walls too"],
-    image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&q=80",
-    fallback: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&q=80",
+    features: [
+      "Driveways & patios",
+      "Decking & paving",
+      "Moss & algae removal",
+      "Fencing & walls too",
+    ],
+    image:
+      "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&q=80",
+    fallback:
+      "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&q=80",
     color: "from-blue-900/20",
   },
 ];
@@ -74,15 +101,22 @@ function ServiceCard({ service, index }) {
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 1024px) 100vw, 50vw"
-          onError={(e) => { e.currentTarget.src = service.fallback; }}
+          onError={(e) => {
+            e.currentTarget.src = service.fallback;
+          }}
         />
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.color} to-transparent opacity-60`} />
-        
+        <div
+          className={`absolute inset-0 bg-linear-to-br ${service.color} to-transparent opacity-60`}
+        />
+
         {/* Service number */}
         <div className="absolute top-5 left-5">
           <span
             className="text-white/20 font-bold leading-none"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: "4rem" }}
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "4rem",
+            }}
           >
             0{index + 1}
           </span>
@@ -116,7 +150,10 @@ function ServiceCard({ service, index }) {
         {/* Features */}
         <ul className="grid grid-cols-2 gap-2 mb-8">
           {service.features.map((f) => (
-            <li key={f} className="flex items-center gap-2 text-sm text-base-content/70 font-sans">
+            <li
+              key={f}
+              className="flex items-center gap-2 text-sm text-base-content/70 font-sans"
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
               {f}
             </li>
@@ -136,7 +173,11 @@ function ServiceCard({ service, index }) {
             stroke="currentColor"
             strokeWidth={2}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
           </svg>
         </Link>
       </div>
@@ -169,7 +210,11 @@ export default function ServicesSection({ featured = false }) {
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: 0.8,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="text-base-content leading-tight mb-4"
             style={{
               fontFamily: "'Playfair Display', serif",

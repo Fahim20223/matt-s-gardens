@@ -26,8 +26,8 @@ export default function Hero() {
       />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/10" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/40 to-transparent" />
 
       {/* Noise texture overlay */}
       <div
@@ -163,7 +163,7 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
+          className="w-px h-10 bg-linear-to-b from-white/40 to-transparent"
         />
       </motion.div>
     </section>
