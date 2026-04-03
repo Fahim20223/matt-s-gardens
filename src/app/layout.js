@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Matt's Gardens",
   description: "Professional gardening services in Hertfordshire",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }) {
