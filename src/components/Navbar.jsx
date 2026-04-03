@@ -13,17 +13,13 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [theme, setTheme] = useState("light");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  useEffect(() => {
-    const stored = localStorage.getItem("theme") || "light";
-    setTheme(stored);
-    document.documentElement.setAttribute("data-theme", stored);
-  }, []);
+  // transparent only on home before scroll
+  const isTransparent = isHome && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -31,176 +27,298 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : "light";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-    document.documentElement.setAttribute("data-theme", next);
-  };
-
   return (
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled || !isHome
-            ? "bg-base-100/90 backdrop-blur-md shadow-sm border-b border-base-200"
-            : "bg-transparent"
-        }`}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          backgroundColor: isTransparent ? "transparent" : "#ffffff",
+          borderBottom: isTransparent
+            ? "1px solid rgba(255,255,255,0.12)"
+            : "1px solid #e8e2d9",
+          boxShadow:
+            scrolled && !isTransparent ? "0 2px 20px rgba(0,0,0,0.06)" : "none",
+          transition:
+            "background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.3s ease",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 lg:px-10 h-16 md:h-20 flex items-center justify-between">
+        <div
+          style={{
+            maxWidth: 1280,
+            margin: "0 auto",
+            padding: "0 clamp(16px,4vw,40px)",
+            height: 64,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-9">
-              <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                <circle cx="18" cy="18" r="17" className="fill-primary/10 stroke-primary" strokeWidth="1.5" />
-                {/* Leaf shape */}
+          <Link
+            href="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+            }}
+          >
+            <div
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: "50%",
+                background: isTransparent
+                  ? "rgba(255,255,255,0.15)"
+                  : "#3d6b2c",
+                border: isTransparent
+                  ? "1px solid rgba(255,255,255,0.3)"
+                  : "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: isTransparent
+                  ? "none"
+                  : "0 2px 8px rgba(61,107,44,0.3)",
+                transition: "all 0.4s ease",
+              }}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                style={{ width: 20, height: 20 }}
+              >
                 <path
-                  d="M18 28 C18 28 10 22 10 15 C10 11 13.5 8 18 8 C22.5 8 26 11 26 15 C26 22 18 28 18 28Z"
-                  className="fill-primary"
-                  opacity="0.85"
+                  d="M12 21C12 21 5 15.5 5 9.5C5 6.5 8.5 4 12 4C15.5 4 19 6.5 19 9.5C19 15.5 12 21 12 21Z"
+                  fill="white"
+                  fillOpacity="0.95"
                 />
-                {/* Stem */}
-                <line x1="18" y1="28" x2="18" y2="32" className="stroke-primary" strokeWidth="1.5" strokeLinecap="round" />
-                {/* Vein */}
-                <path d="M18 12 C18 12 14 17 18 24" className="stroke-base-100" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+                <path
+                  d="M12 7C12 7 9 10.5 12 16"
+                  stroke={isTransparent ? "rgba(255,255,255,0.5)" : "#3d6b2c"}
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+                <line
+                  x1="12"
+                  y1="21"
+                  x2="12"
+                  y2="23.5"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
             </div>
             <div>
-              <span
-                className={`font-display text-lg font-bold tracking-tight leading-none block transition-colors duration-300 ${isHome && !scrolled ? "text-white" : "text-base-content"}`}
-                style={{ fontFamily: "'Playfair Display', serif" }}
+              <div
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 700,
+                  fontSize: "clamp(14px,2.5vw,17px)",
+                  color: isTransparent ? "#ffffff" : "#1a2e12",
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.1,
+                  transition: "color 0.4s ease",
+                  whiteSpace: "nowrap",
+                }}
               >
                 Matt's Gardens
-              </span>
-              <span className={`text-[10px] tracking-[0.18em] uppercase font-sans transition-colors duration-300 ${isHome && !scrolled ? "text-white/50" : "text-base-content/40"}`}>
+              </div>
+              <div
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: 9.5,
+                  color: isTransparent ? "rgba(255,255,255,0.55)" : "#7a8c6e",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  marginTop: 1,
+                  transition: "color 0.4s ease",
+                }}
+              >
                 Hertfordshire
-              </span>
+              </div>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Links */}
+          <div
+            style={{ display: "flex", alignItems: "center", gap: 32 }}
+            className="desktop-nav"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative text-sm tracking-wide transition-colors duration-200 group font-sans ${
-                  isHome && !scrolled
-                    ? "text-white/80 hover:text-white"
-                    : "text-base-content/70 hover:text-base-content"
-                }`}
+                style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: 14,
+                  fontWeight: 500,
+                  color: isTransparent ? "rgba(255,255,255,0.85)" : "#3a4a30",
+                  textDecoration: "none",
+                  position: "relative",
+                  transition: "color 0.4s ease",
+                }}
+                className="nav-link"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </div>
 
-          {/* Right side */}
-          <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-200 hover:bg-primary/10 ${
-                isHome && !scrolled
-                  ? "border-white/30 hover:border-white/70"
-                  : "border-base-300 hover:border-primary"
-              }`}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {theme === "light" ? (
-                  <motion.svg
-                    key="moon"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`w-4 h-4 transition-colors duration-300 ${isHome && !scrolled ? "text-white/80" : "text-base-content/70"}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-                  </motion.svg>
-                ) : (
-                  <motion.svg
-                    key="sun"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`w-4 h-4 transition-colors duration-300 ${isHome && !scrolled ? "text-white/80" : "text-base-content/70"}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                  </motion.svg>
-                )}
-              </AnimatePresence>
-            </button>
-
-            {/* CTA */}
+          {/* CTA + Hamburger */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <Link
               href="/contact"
-              className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-content text-sm font-medium px-5 py-2.5 rounded-full hover:bg-primary/90 transition-all duration-200 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5"
+              className="nav-cta"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 7,
+                background: isTransparent
+                  ? "rgba(255,255,255,0.15)"
+                  : "#3d6b2c",
+                border: isTransparent
+                  ? "1px solid rgba(255,255,255,0.35)"
+                  : "none",
+                color: "white",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 14,
+                fontWeight: 600,
+                padding: "10px 20px",
+                borderRadius: 99,
+                textDecoration: "none",
+                boxShadow: isTransparent
+                  ? "none"
+                  : "0 2px 12px rgba(61,107,44,0.25)",
+                transition: "all 0.4s ease",
+              }}
             >
-              Book Now
+              Get in Touch
+              <svg
+                style={{ width: 14, height: 14 }}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                />
+              </svg>
             </Link>
 
             {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
-              className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+              className="hamburger-btn"
+              style={{
+                display: "none",
+                flexDirection: "column",
+                gap: 5,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 6,
+              }}
             >
-              <motion.span
-                animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className={`block w-5 h-px transition-all ${isHome && !scrolled ? "bg-white" : "bg-base-content"}`}
-              />
-              <motion.span
-                animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className={`block w-5 h-px transition-all ${isHome && !scrolled ? "bg-white" : "bg-base-content"}`}
-              />
-              <motion.span
-                animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className={`block w-5 h-px transition-all ${isHome && !scrolled ? "bg-white" : "bg-base-content"}`}
-              />
+              {[
+                menuOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 },
+                menuOpen ? { opacity: 0 } : { opacity: 1 },
+                menuOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 },
+              ].map((anim, i) => (
+                <motion.span
+                  key={i}
+                  animate={anim}
+                  style={{
+                    display: "block",
+                    width: 22,
+                    height: 2,
+                    background: isTransparent ? "#ffffff" : "#3a4a30",
+                    borderRadius: 4,
+                    transition: "background 0.4s ease",
+                  }}
+                />
+              ))}
             </button>
           </div>
         </div>
+
+        <style jsx>{`
+          @media (max-width: 768px) {
+            .desktop-nav { display: none !important; }
+            .nav-cta { display: none !important; }
+            .hamburger-btn { display: flex !important; }
+          }
+          @media (min-width: 769px) {
+            .hamburger-btn { display: none !important; }
+          }
+          .nav-link:hover { color: #3d6b2c !important; }
+          .nav-cta:hover {
+            background: #2f5422 !important;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(61,107,44,0.35) !important;
+          }
+        `}</style>
       </motion.nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-16 md:top-20 left-0 right-0 z-40 bg-base-100/95 backdrop-blur-lg border-b border-base-200 shadow-xl md:hidden"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22 }}
+            style={{
+              position: "fixed",
+              top: 64,
+              left: 0,
+              right: 0,
+              zIndex: 40,
+              background: "#fff",
+              borderBottom: "1px solid #e8e2d9",
+              boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+            }}
           >
-            <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-1">
+            <div
+              style={{
+                maxWidth: 1280,
+                margin: "0 auto",
+                padding: "12px 20px 20px",
+              }}
+            >
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06 }}
+                  transition={{ delay: i * 0.05 }}
                 >
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block py-3 text-base-content/80 hover:text-primary text-base font-sans tracking-wide border-b border-base-200/50 last:border-0 transition-colors"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "14px 0",
+                      color: "#3a4a30",
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 500,
+                      fontSize: 16,
+                      borderBottom: "1px solid #f0ece5",
+                      textDecoration: "none",
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -209,9 +327,22 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-4 inline-flex items-center justify-center bg-primary text-primary-content text-sm font-medium px-5 py-3 rounded-full hover:bg-primary/90 transition-all"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginTop: 14,
+                  background: "#3d6b2c",
+                  color: "white",
+                  padding: "14px",
+                  borderRadius: 99,
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontWeight: 600,
+                  fontSize: 15,
+                  textDecoration: "none",
+                }}
               >
-                Book Now
+                Get in Touch
               </Link>
             </div>
           </motion.div>

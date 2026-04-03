@@ -1,19 +1,20 @@
 "use client";
-import { useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import { usePathname } from "next/navigation";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export default function Layout({ children }) {
-  // Init theme from localStorage on first load
-  useEffect(() => {
-    const stored = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-theme", stored);
-  }, []);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   return (
-    <div className="min-h-screen flex flex-col bg-base-100 text-base-content">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
-      <main className="flex-1">{children}</main>
+      {/* Home page manages its own top spacing via Hero pt-24.
+          All other pages need padding to clear the fixed 72px navbar. */}
+      <main className={`flex-1 ${isHome ? "" : "pt-[64px]"}`}>
+        {children}
+      </main>
       <Footer />
     </div>
   );

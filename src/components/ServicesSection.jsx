@@ -1,185 +1,293 @@
 "use client";
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
 const services = [
   {
     id: "hedge-trimming",
+    number: "01",
     title: "Hedge Trimming",
-    tagline: "Crisp edges, tidy lines.",
+    tagline: "Precision Hedge Care",
     description:
-      "From small garden hedges to large boundary privets, I'll get them looking sharp. Regular trimming keeps your garden looking well-maintained and healthy — and it's something I genuinely enjoy getting right. No jagged edges, no missed patches.",
+      "Sharp, healthy hedges every time. Matt handles all types and sizes — with clean-up and waste removal always included.",
     features: [
       "All hedge types & sizes",
-      "Clean-up included",
+      "Waste removal included",
       "Shape & height adjustments",
-      "Seasonal scheduling available",
+      "Seasonal scheduling",
     ],
-    image: "/images/hedge-trimming.jpg",
-    fallback:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    color: "from-green-900/20",
+    image:
+      "https://t3.ftcdn.net/jpg/05/34/34/92/240_F_534349268_XLErmUsNRNWmBU2f5fBn7z29oP7CNYkW.jpg",
+    href: "/services/hedge-trimming",
+    accentColor: "#3d6b2c",
+    bgAccent: "#eaf2e3",
+    tag: "Most Popular",
   },
   {
     id: "garden-clearance",
+    number: "02",
     title: "Garden Clearance",
-    tagline: "Out with the old, in with the fresh.",
+    tagline: "Full Garden Reset",
     description:
-      "Overgrown garden? Inherited a mess? I'll clear it all out — weeds, debris, old plants, rubbish — and leave you with a clean slate. Ideal before a redesign or if you just want your outdoor space back. All waste is disposed of responsibly.",
+      "Overgrown or inherited a mess? Matt clears weeds, debris, and rubbish — leaving you a clean slate. All waste removed responsibly.",
     features: [
       "Full or partial clearances",
       "Waste removal included",
-      "Before & after documentation",
-      "Same-day quotes available",
+      "Same-day quotes",
+      "Before & after photos",
     ],
     image:
-      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
-    fallback:
-      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
-    color: "from-stone-900/20",
+      "https://images.ctfassets.net/5kq8dse7hipf/4PHD3b9MqaxeSom0gjOeJE/463ba7f65610e41e259ed8028943641d/garden-clearance-cost-featured.jpeg",
+    href: "/services/garden-clearance",
+    accentColor: "#8b6340",
+    bgAccent: "#f5ede3",
+    tag: null,
   },
   {
-    id: "small-tree-work",
+    id: "tree-work",
+    number: "03",
     title: "Small Tree Work",
-    tagline: "Keep your trees in check.",
+    tagline: "Light Tree Surgery",
     description:
-      "Crown reduction, deadwood removal, basic pruning — I handle small tree work safely and carefully. Whether it's a fruit tree that needs a tidy up or a young tree that's getting too big for the space, I'll bring it back under control.",
+      "Crown reduction, deadwood removal, basic pruning — done safely and neatly. Fruit trees, ornamentals, or anything getting too large.",
     features: [
       "Crown reduction & shaping",
       "Deadwood removal",
       "Stump grinding available",
-      "Safe & tidy working",
+      "Safe working practice",
     ],
     image:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
-    fallback:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
-    color: "from-emerald-900/20",
+      "https://greenpinetreeservice.com/wp-content/uploads/2024/05/front-yard-1210x423.jpg",
+    href: "/services/tree-work",
+    accentColor: "#3d6b2c",
+    bgAccent: "#eaf2e3",
+    tag: null,
   },
   {
-    id: "jet-washing",
-    title: "Jet Washing",
-    tagline: "Make it look brand new.",
+    id: "garden-maintenance",
+    number: "04",
+    title: "Garden Maintenance",
+    tagline: "Ongoing Garden Care",
     description:
-      "Driveways, patios, decking, pathways — jet washing makes an incredible difference. Years of grime, moss, and algae lifted in a few hours. It's one of the most satisfying services I offer, and the results speak for themselves.",
+      "Regular visits to keep everything in order year-round. Flexible fortnightly or monthly plans tailored to your garden.",
     features: [
-      "Driveways & patios",
-      "Decking & paving",
-      "Moss & algae removal",
-      "Fencing & walls too",
+      "Fortnightly or monthly visits",
+      "Seasonal care plans",
+      "Weeding & general upkeep",
+      "Fully tailored",
     ],
     image:
-      "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&q=80",
-    fallback:
-      "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&q=80",
-    color: "from-blue-900/20",
+      "https://grdcentre.com/assets/powerhouse/uploads/images/maintenence3.jpg",
+    href: "/services/garden-maintenance",
+    accentColor: "#3d6b2c",
+    bgAccent: "#eaf2e3",
+    tag: "Recommended",
+  },
+  {
+    id: "lawn-care",
+    number: "05",
+    title: "Lawn Care",
+    tagline: "Grass Cutting & Health",
+    description:
+      "A lush, well-edged lawn transforms the whole garden. Regular mowing, edging, and treatments to keep yours looking its best.",
+    features: [
+      "Regular mowing & edging",
+      "Scarifying & aerating",
+      "Lawn treatments",
+      "Stripe finishing on request",
+    ],
+    image:
+      "https://www.thespruce.com/thmb/gIE2azGLSJr84LCnTm-8XIbAuWs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/spring-lawn-care-2132455-09-df14429ef98948e69439952f6e7287fa.jpg",
+    href: "/services/lawn-care",
+    accentColor: "#3d6b2c",
+    bgAccent: "#eaf2e3",
+    tag: null,
+  },
+  {
+    id: "planting",
+    number: "06",
+    title: "Planting & Borders",
+    tagline: "Colour & Structure",
+    description:
+      "Seasonal planting, border tidying, and new bed creation. Matt will bring colour and structure to any part of your garden.",
+    features: [
+      "Seasonal planting",
+      "Border weeding & edging",
+      "New bed preparation",
+      "Plant advice included",
+    ],
+    image:
+      "https://assets.rhs.org.uk/05836e9f-2692-012f-b4fe-e3f22d127fa9/406e1cbd-00a0-4c5f-b268-51091954c5ea/blue-and-yellow-border.jpg?w=1200&fit=clip&fm=jpg&auto=format",
+    href: "/services/planting",
+    accentColor: "#8b6340",
+    bgAccent: "#f5ede3",
+    tag: null,
   },
 ];
 
 function ServiceCard({ service, index }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const isEven = index % 2 === 0;
+  const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${
-        isEven ? "" : "lg:[&>*:first-child]:order-last"
-      }`}
+      transition={{
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+        delay: (index % 3) * 0.1,
+      }}
+      className="group relative bg-white rounded-2xl overflow-hidden flex flex-col"
+      style={{
+        boxShadow: "0 2px 20px rgba(0,0,0,0.07)",
+        border: "1px solid #ede9e1",
+      }}
     >
       {/* Image */}
-      <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-base-200 group">
+      <div
+        className="relative overflow-hidden"
+        style={{ aspectRatio: "16/10" }}
+      >
         <Image
           src={service.image}
           alt={service.title}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          onError={(e) => {
-            e.currentTarget.src = service.fallback;
-          }}
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
         />
         <div
-          className={`absolute inset-0 bg-linear-to-br ${service.color} to-transparent opacity-60`}
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 55%)",
+          }}
         />
-
-        {/* Service number */}
-        <div className="absolute top-5 left-5">
+        {/* Number */}
+        <span
+          className="absolute bottom-3 left-4 text-white/30 font-bold leading-none select-none"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: 56 }}
+        >
+          {service.number}
+        </span>
+        {/* Tag */}
+        {service.tag && (
           <span
-            className="text-white/20 font-bold leading-none"
+            className="absolute top-3 right-3 text-white text-xs font-semibold px-3 py-1 rounded-full"
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "4rem",
+              background: service.accentColor,
+              fontFamily: "'DM Sans', sans-serif",
             }}
           >
-            0{index + 1}
+            {service.tag}
           </span>
-        </div>
+        )}
+        {/* Accent bar */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-0.5"
+          style={{ background: service.accentColor }}
+        />
       </div>
 
-      {/* Content */}
-      <div className="py-4">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="w-6 h-px bg-primary" />
-          <span className="text-primary text-xs tracking-[0.2em] uppercase font-sans font-medium">
-            {service.tagline}
-          </span>
-        </div>
+      {/* Body */}
+      <div className="flex flex-col flex-1 p-6">
+        <span
+          className="text-xs font-semibold uppercase tracking-widest mb-2"
+          style={{
+            color: service.accentColor,
+            fontFamily: "'DM Sans', sans-serif",
+          }}
+        >
+          {service.tagline}
+        </span>
 
         <h3
-          className="text-base-content mb-4 leading-tight"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
-            fontWeight: 700,
-          }}
+          className="text-xl font-bold mb-3 leading-snug"
+          style={{ fontFamily: "'Playfair Display', serif", color: "#1a2e12" }}
         >
           {service.title}
         </h3>
 
-        <p className="text-base-content/65 font-sans leading-relaxed mb-7 text-base">
+        <p
+          className="text-sm leading-relaxed mb-5"
+          style={{ fontFamily: "'DM Sans', sans-serif", color: "#5c6b50" }}
+        >
           {service.description}
         </p>
 
-        {/* Features */}
-        <ul className="grid grid-cols-2 gap-2 mb-8">
+        <ul className="grid grid-cols-2 gap-x-3 gap-y-1.5 mb-6">
           {service.features.map((f) => (
-            <li
-              key={f}
-              className="flex items-center gap-2 text-sm text-base-content/70 font-sans"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-              {f}
+            <li key={f} className="flex items-center gap-1.5">
+              <div
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: service.accentColor }}
+              />
+              <span
+                className="text-xs font-medium"
+                style={{
+                  color: "#4a5c3f",
+                  fontFamily: "'DM Sans', sans-serif",
+                }}
+              >
+                {f}
+              </span>
             </li>
           ))}
         </ul>
 
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2.5 bg-primary text-primary-content text-sm font-medium px-6 py-3.5 rounded-full hover:bg-primary/90 transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 group"
-        >
-          Book This Service
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-4 h-4 transition-transform group-hover:translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
+        <div className="mt-auto flex items-center justify-between">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-1.5 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:opacity-85 hover:-translate-y-0.5"
+            style={{
+              background: service.accentColor,
+              fontFamily: "'DM Sans', sans-serif",
+              boxShadow: `0 4px 14px ${service.accentColor}38`,
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </Link>
+            Book Now
+            <svg
+              className="w-3.5 h-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+              />
+            </svg>
+          </Link>
+
+          <Link
+            href={service.href}
+            className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide transition-all duration-200 hover:gap-2"
+            style={{
+              color: service.accentColor,
+              fontFamily: "'DM Sans', sans-serif",
+            }}
+          >
+            Details
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
+        </div>
       </div>
     </motion.div>
   );
@@ -188,78 +296,89 @@ function ServiceCard({ service, index }) {
 export default function ServicesSection({ featured = false }) {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "-60px" });
-  const displayServices = featured ? services.slice(0, 2) : services;
+  const displayServices = featured ? services.slice(0, 3) : services;
 
   return (
-    <section className="py-24 lg:py-36 bg-base-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="bg-white px-5 md:px-10 pt-20 pb-16">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div ref={headerRef} className="max-w-2xl mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-3 mb-5"
-          >
-            <span className="w-8 h-px bg-primary" />
-            <span className="text-primary text-xs tracking-[0.25em] uppercase font-sans font-medium">
-              What I Do
-            </span>
-          </motion.div>
+        <div
+          ref={headerRef}
+          className="flex flex-wrap justify-between items-end gap-5 mb-12"
+        >
+          <div className="max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : {}}
+              className="flex items-center gap-2.5 mb-4"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#eaf2e3] flex items-center justify-center">
+                <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+                  <path
+                    d="M10 17C10 17 4 12.5 4 8C4 5.5 6.7 3.5 10 3.5C13.3 3.5 16 5.5 16 8C16 12.5 10 17 10 17Z"
+                    fill="#3d6b2c"
+                  />
+                </svg>
+              </div>
+              <span
+                className="text-xs font-semibold uppercase tracking-widest text-[#3d6b2c]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                What We Do
+              </span>
+            </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="text-base-content leading-tight mb-4"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 700,
-            }}
-          >
-            Services built around{" "}
-            <span className="text-primary">your garden.</span>
-          </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.12 }}
+              className="text-4xl lg:text-5xl font-bold leading-tight"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                color: "#1a2e12",
+              }}
+            >
+              Our Services, Built Around{" "}
+              <span className="text-[#3d6b2c]">Your Garden</span>
+            </motion.h2>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-base-content/60 font-sans leading-relaxed"
-          >
-            Every job is done properly, with care. Here's what I offer across
-            Hertfordshire — no subcontractors, just Matt.
-          </motion.p>
+          {featured && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={headerInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.2 }}
+            >
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 border border-[#c8bfaf] text-[#3a4a30] text-sm font-medium px-5 py-2.5 rounded-full transition-all hover:border-[#3d6b2c] hover:text-[#3d6b2c]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                All Services
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </motion.div>
+          )}
         </div>
 
-        {/* Services */}
-        <div className="space-y-20 lg:space-y-28">
-          {displayServices.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayServices.map((s, i) => (
+            <ServiceCard key={s.id} service={s} index={i} />
           ))}
         </div>
-
-        {featured && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mt-16"
-          >
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 border border-primary text-primary font-medium px-8 py-4 rounded-full hover:bg-primary hover:text-primary-content transition-all duration-200 font-sans text-sm"
-            >
-              View All Services
-            </Link>
-          </motion.div>
-        )}
       </div>
     </section>
   );
