@@ -37,5 +37,5 @@ A modern and responsive gardening services website built with **Next.js**, **Tai
 Clone the repository:
 
 ```bash
-git clone https://github.com/Fahim20223/-Cyril-Ernest.git
+git clone https://github.com/Fahim20223/matt-s-gardens.git
 ```
