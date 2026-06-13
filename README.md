@@ -6,10 +6,6 @@ A modern and responsive gardening services website built with **Next.js**, **Tai
 
 🔗 Live Site: https://matt-s-gardens.vercel.app/
 
-## 📸 Project Preview
-
-(Add screenshots or GIFs here)
-
 ## ✨ Features
 
 - Responsive design for mobile, tablet, and desktop
