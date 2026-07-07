@@ -15,7 +15,20 @@ const C = {
   white: "#ffffff",
 };
 
-const services = [
+interface Service {
+  title: string;
+  blurb: string;
+  img: string;
+  href: string;
+  icon?: React.ReactNode;
+}
+
+interface ServiceCardProps {
+  s: Service;
+  i: number;
+}
+
+const services: Service[] = [
   {
     title: "Hedge Trimming",
     blurb: "Crisp edges and perfectly shaped boundaries — every single visit.",
@@ -45,7 +58,7 @@ const services = [
   },
 ];
 
-function ServiceCard({ s, i }) {
+function ServiceCard({ s, i }: ServiceCardProps) {
   const [hovered, setHovered] = useState(false);
 
   return (

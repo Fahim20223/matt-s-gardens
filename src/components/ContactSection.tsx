@@ -1,5 +1,11 @@
 "use client";
-import { useState, useRef } from "react";
+import {
+  useState,
+  useRef,
+  ChangeEvent,
+  ReactNode,
+  SyntheticEvent,
+} from "react";
 import { motion, useInView } from "framer-motion";
 
 const services = [
@@ -90,10 +96,11 @@ export default function ContactSection() {
     message: "",
   });
 
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
   };
@@ -153,7 +160,7 @@ export default function ContactSection() {
                 color: "#1a2e15",
               }}
             >
-              Let's talk about{" "}
+              Let&apos;s talk about{" "}
               <span style={{ color: "#4a7c3f" }}>your garden.</span>
             </motion.h2>
 
@@ -168,8 +175,8 @@ export default function ContactSection() {
                 fontFamily: "'DM Sans', sans-serif",
               }}
             >
-              Got a question or ready to book? Drop me a message and I'll get
-              back to you within 24 hours. No hard sell, no obligation.
+              Got a question or ready to book? Drop me a message and I&apos;ll
+              get back to you within 24 hours. No hard sell, no obligation.
             </motion.p>
 
             {/* Contact items */}
@@ -407,7 +414,8 @@ export default function ContactSection() {
                     fontFamily: "'DM Sans', sans-serif",
                   }}
                 >
-                  No spam, ever. I'll only use your details to get back to you.
+                  No spam, ever. I&apos;ll only use your details to get back to
+                  you.
                 </p>
               </form>
             )}
@@ -427,7 +435,13 @@ const inputStyle = {
   fontFamily: "'DM Sans', sans-serif",
 };
 
-function FieldWrap({ label, children }) {
+function FieldWrap({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
   return (
     <div>
       <label

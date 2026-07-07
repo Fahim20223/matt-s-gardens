@@ -75,13 +75,13 @@ const galleryImages = [
   },
 ];
 
-function Slider({ project }) {
+function Slider({ project }: { project: (typeof projects)[number] }) {
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
   const [imgErrors, setImgErrors] = useState({ before: false, after: false });
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const update = useCallback((clientX) => {
+  const update = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
@@ -89,13 +89,13 @@ function Slider({ project }) {
   }, []);
 
   const onMouse = useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       if (dragging) update(e.clientX);
     },
     [dragging, update],
   );
   const onTouch = useCallback(
-    (e) => {
+    (e: TouchEvent) => {
       if (dragging) update(e.touches[0].clientX);
     },
     [dragging, update],
@@ -119,7 +119,7 @@ function Slider({ project }) {
   return (
     <div
       ref={containerRef}
-      onMouseMove={onMouse}
+      // onMouseMove={onMouse}
       onMouseUp={stop}
       style={{
         position: "relative",
@@ -169,29 +169,19 @@ function Slider({ project }) {
         style={{
           position: "absolute",
           inset: 0,
-          overflow: "hidden",
-          width: `${pos}%`,
+          clipPath: `inset(0 ${100 - pos}% 0 0)`,
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: containerRef.current
-              ? `${containerRef.current.offsetWidth}px`
-              : "100vw",
-          }}
-        >
-          <Image
-            src={imgErrors.before ? project.beforeFallback : project.before}
-            alt="Before"
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            onError={() => setImgErrors((p) => ({ ...p, before: true }))}
-            quality={90}
-          />
-        </div>
+        <Image
+          src={imgErrors.before ? project.beforeFallback : project.before}
+          alt="Before"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          onError={() => setImgErrors((p) => ({ ...p, before: true }))}
+          quality={90}
+        />
+
         <span
           style={{
             position: "absolute",
