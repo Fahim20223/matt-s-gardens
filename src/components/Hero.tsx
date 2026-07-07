@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function Hero() {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -26,8 +26,8 @@ export default function Hero() {
       />
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/10" />
+      <div className="absolute inset-0 bg-linear-to-r from-black/40 to-transparent" />
 
       {/* Noise texture */}
       <div
@@ -49,7 +49,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 mb-4"
           >
             <span className="text-[#8fbf7a] text-xs tracking-[0.25em] uppercase font-medium">
-              Hertfordshire's Trusted Gardener
+              Hertfordshire&apos;s Trusted Gardener
             </span>
           </motion.div>
 
@@ -137,7 +137,7 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.8 }}
-          className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
+          className="w-px h-10 bg-linear-to-b from-white/40 to-transparent"
         />
       </motion.div>
     </section>

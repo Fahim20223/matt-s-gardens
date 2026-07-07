@@ -127,7 +127,12 @@ const services = [
   },
 ];
 
-function ServiceCard({ service, index }) {
+type ServiceCardProps = {
+  service: (typeof services)[number];
+  index: number;
+};
+
+function ServiceCard({ service, index }: ServiceCardProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
 

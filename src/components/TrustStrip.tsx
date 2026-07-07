@@ -15,15 +15,22 @@ const stats = [
   { value: "Same Day", label: "Quotes Available" },
 ];
 
-function CountUp({ target, duration = 1800 }) {
+type CountUpProps = {
+  target: string;
+  duration?: number;
+};
+
+function CountUp({ target, duration = 1800 }: CountUpProps) {
   const [display, setDisplay] = useState("0");
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold: 0.3 }
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.3 },
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -32,10 +39,13 @@ function CountUp({ target, duration = 1800 }) {
   useEffect(() => {
     if (!inView) return;
     const num = parseInt(target.replace(/\D/g, ""), 10);
-    if (isNaN(num)) { setDisplay(target); return; }
+    if (isNaN(num)) {
+      setDisplay(target);
+      return;
+    }
     const suffix = target.replace(/[0-9]/g, "");
-    let start = null;
-    const step = (ts) => {
+    let start: number | null = null;
+    const step = (ts: number) => {
       if (!start) start = ts;
       const p = Math.min((ts - start) / duration, 1);
       const ease = 1 - Math.pow(1 - p, 3);
@@ -51,7 +61,9 @@ function CountUp({ target, duration = 1800 }) {
 
 export default function TrustStrip() {
   return (
-    <section style={{ background: C.dark, padding: "0 40px", overflow: "hidden" }}>
+    <section
+      style={{ background: C.dark, padding: "0 40px", overflow: "hidden" }}
+    >
       <div
         style={{
           maxWidth: 1280,
@@ -67,10 +79,17 @@ export default function TrustStrip() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              delay: i * 0.1,
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             style={{
               padding: "38px 24px",
-              borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+              borderRight:
+                i < stats.length - 1
+                  ? "1px solid rgba(255,255,255,0.08)"
+                  : "none",
               textAlign: "center",
             }}
           >
@@ -109,7 +128,7 @@ export default function TrustStrip() {
           }
           .trust-grid > div {
             border-right: none !important;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
           }
         }
       `}</style>

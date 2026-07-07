@@ -159,7 +159,7 @@ export default function AboutTeaser() {
                 lineHeight: 1.5,
               }}
             >
-              "Absolutely brilliant — garden looks incredible."
+              &quot;Absolutely brilliant — garden looks incredible.&quot;
             </p>
           </motion.div>
 
@@ -259,11 +259,11 @@ export default function AboutTeaser() {
               marginBottom: 14,
             }}
           >
-            Hi — I'm Matt. I've been looking after gardens across Hertfordshire
-            for over eight years. There's no team of strangers, no
-            subcontractors. When you book with Matt's Gardens, you get me —
-            showing up on time, taking care of your space like it's my own, and
-            leaving it looking genuinely great.
+            Hi — I&apos;m Matt. I&apos;ve been looking after gardens across
+            Hertfordshire for over eight years. There&apos;s no team of
+            strangers, no subcontractors. When you book with Matt&apos;s
+            Gardens, you get me — showing up on time, taking care of your space
+            like it&apos;s my own, and leaving it looking genuinely great.
           </p>
           <p
             style={{

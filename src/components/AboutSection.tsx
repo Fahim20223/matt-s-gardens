@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 /* ═══════════════════════════════════════════════════════
    GLOBAL STYLES — injected once into <head>
@@ -203,7 +204,7 @@ function useInView(threshold = 0.25) {
   return { ref, inView };
 }
 
-function useCounter(target, inView) {
+function useCounter(target: number, inView: boolean) {
   const [count, setCount] = useState(0);
   useEffect(() => {
     if (!inView) return;
@@ -224,7 +225,7 @@ function useCounter(target, inView) {
 /* ═══════════════════════════════════════════════════════
    SMALL COMPONENTS
 ═══════════════════════════════════════════════════════ */
-function Pill({ children }) {
+function Pill({ children }: { children: ReactNode }) {
   return (
     <span className="pill">
       <span className="pill-dot" />
@@ -252,7 +253,7 @@ function LeafSVG({ size = 28 }) {
   );
 }
 
-function SectionHeading({ pill, title, italic, sub, light = false }) {
+function SectionHeading({ pill, title, italic, sub, light = false }: any) {
   return (
     <div className="reveal" style={{ marginBottom: "52px" }}>
       <Pill>{pill}</Pill>
@@ -289,13 +290,13 @@ function SectionHeading({ pill, title, italic, sub, light = false }) {
   );
 }
 
-function AnimatedCounter({ target, suffix = "", override = null }) {
+function AnimatedCounter({ target, suffix = "", override = null }: any) {
   const { ref, inView } = useInView(0.3);
   const count = useCounter(target, inView);
   return <div ref={ref}>{override ? override : `${count}${suffix}`}</div>;
 }
 
-function FAQ({ q, a }) {
+function FAQ({ q, a }: any) {
   const [open, setOpen] = useState(false);
   return (
     <div className="faq-item">
@@ -426,9 +427,9 @@ export default function AboutPage() {
               marginBottom: "16px",
             }}
           >
-            <a href="/" style={{ color: "inherit", textDecoration: "none" }}>
+            <Link href="/" style={{ color: "inherit", textDecoration: "none" }}>
               Home
-            </a>{" "}
+            </Link>{" "}
             › <span style={{ color: "rgba(255,255,255,.7)" }}>About</span>
           </p>
 
@@ -644,7 +645,7 @@ export default function AboutPage() {
                     <path d="M2 7h10M8 3l4 4-4 4" />
                   </svg>
                 </a>
-                <a
+                <Link
                   href="/services"
                   className="btn-outline"
                   style={{
@@ -653,7 +654,7 @@ export default function AboutPage() {
                   }}
                 >
                   View Services
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -709,7 +710,7 @@ export default function AboutPage() {
                     fontWeight: 600,
                   }}
                 >
-                  {c.icon} {c.title}
+                  {c.title}
                 </h3>
                 <p
                   style={{
@@ -960,7 +961,7 @@ export default function AboutPage() {
                   fontSize: "1rem",
                 }}
               >
-                📞 01234 567 890
+                01234 567 890
               </a>
             </div>
 
